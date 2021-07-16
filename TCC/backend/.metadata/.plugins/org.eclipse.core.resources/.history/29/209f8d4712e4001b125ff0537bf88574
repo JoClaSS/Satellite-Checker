@@ -1,0 +1,5 @@
+package com.tcc.Satellitechecker.domain;
+
+public class MeasuresService {
+
+}

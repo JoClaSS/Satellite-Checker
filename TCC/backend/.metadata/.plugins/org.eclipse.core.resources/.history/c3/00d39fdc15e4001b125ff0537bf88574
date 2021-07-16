@@ -1,0 +1,31 @@
+package com.tcc.Satellitechecker.domain;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+public interface MeasuresRepository extends JpaRepository<Measures,Integer> {
+	
+	  @Query("SELECT r FROM Measures r WHERE (:message is null or r.message= :message)"
+			  + "and (:status is null or r.status= :status)"
+			  + "and (:name is null or r.name= :name)"
+			  )
+	  List<Measures> findMeasures(
+			  @Param("message") String message,
+			  @Param("status") Boolean status,
+			  @Param("name") String name
+			  );
+	  
+	  @Query(value = "Insert into Measures(sample,message,status,sample_time,module_id) VALUES(:sample,:message,:status,:sample_time,:module_id) "
+			 , nativeQuery=true )
+	  List<Measures> saveMeasure(
+			  @Param("message") String message,
+			  @Param("status") Boolean status,
+			  @Param("message") Integer sample,
+			  @Param("status") Date sample_time,
+			  @Param("module_id") Integer id
+			  );
+}

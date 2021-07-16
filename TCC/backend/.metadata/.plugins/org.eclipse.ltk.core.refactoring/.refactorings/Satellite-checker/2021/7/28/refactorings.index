@@ -1,0 +1,19 @@
+1625445412646	Delete element
+1625445416843	Delete element
+1625445427746	Delete element
+1625445436965	Delete element
+1625458982290	Rename type 'satelliteHardware'
+1625459065568	Rename type 'satelliteHardwareRepository'
+1625459087522	Rename type 'module_measures'
+1625459115035	Rename type 'module_measuresRepository'
+1625459130592	Rename type 'module_measuresController'
+1625459151190	Rename type 'satelliteHardwareController'
+1625459198005	Rename type 'satellites'
+1625459219613	Rename type 'satellitesRepository'
+1625459229730	Rename type 'modulesRepository'
+1625459241727	Rename type 'modules'
+1625459250849	Rename type 'measuresRepository'
+1625459258841	Rename type 'measures'
+1625459266824	Rename type 'measuresController'
+1625459274503	Rename type 'modulesController'
+1625459281498	Rename type 'satellitesController'
