@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.Satellitechecker.domain.ModulesRepository;
 import com.tcc.Satellitechecker.domain.Satellites;
+import com.tcc.Satellitechecker.domain.Measures;
 import com.tcc.Satellitechecker.domain.Modules;
+import com.tcc.Satellitechecker.domain.ModulesDTO;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -23,7 +26,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ModulesController {
 		private final ModulesRepository repository;
-		 
+		    
+		
+	    @PostMapping
+	    @ResponseStatus(HttpStatus.CREATED)
+	    public Modules saveSatellite(@RequestBody Modules module) {
+	    	return repository.save(module);	    	
+	    }
+		
+		
 		    @GetMapping
 		    public List<Modules> getAll(){
 		    	return repository.findAll();

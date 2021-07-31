@@ -1,0 +1,14 @@
+package com.tcc.Satellitechecker.domain;
+
+import lombok.Data;
+
+@Data
+public class ModulesDTO {
+  private Integer sample;
+  private String message;
+  private Boolean status;
+  private Integer mId;
+  private Integer sId;
+  
+  
+}

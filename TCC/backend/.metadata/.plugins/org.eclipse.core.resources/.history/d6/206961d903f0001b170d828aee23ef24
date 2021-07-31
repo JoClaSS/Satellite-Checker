@@ -1,0 +1,10 @@
+package com.tcc.Satellitechecker.domain;
+
+import lombok.Data;
+
+@Data
+public class ModulesDTO {
+  Measures measure;
+  Integer mId;
+  Integer sId;
+}

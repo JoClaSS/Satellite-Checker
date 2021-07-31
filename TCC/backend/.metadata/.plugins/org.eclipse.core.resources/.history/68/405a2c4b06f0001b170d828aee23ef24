@@ -1,0 +1,63 @@
+package com.tcc.Satellitechecker.domain;
+
+import java.util.Date;
+import java.util.Optional;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name="measures")
+public class Measures {
+
+	  @Id
+	  @GeneratedValue(strategy = GenerationType.AUTO)
+	  private Integer id;
+	  @Column(name="sample")
+	  private Integer sample;
+	  @Column(name="message")
+	  private String message;
+	  @Column(name="status_report")
+	  private Boolean status;
+	  @CreationTimestamp
+	  @Column(name="sample_time")
+	  @Temporal(TemporalType.TIMESTAMP)
+	  private Date sample_time;
+	  @ManyToOne
+	  @JoinColumn(name="satellites_id")
+	  private Satellites satellite;
+	  @ManyToOne
+	  @JoinColumn(name="modules_id")
+	  private Modules module;
+	
+	  
+	  public  Measures transformToObject(ModulesDTO dto) {
+			Measures measure = new Measures();
+			measure.setMessage(dto.getMessage());
+			measure.setSample(dto.getSample());
+			measure.setStatus(dto.getStatus());
+			return measure;
+	  }
+	
+}

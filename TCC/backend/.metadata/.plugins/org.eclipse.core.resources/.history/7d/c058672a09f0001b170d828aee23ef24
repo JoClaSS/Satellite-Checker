@@ -1,0 +1,19 @@
+package com.tcc.Satellitechecker.domain;
+
+import lombok.Data;
+
+@Data
+public class ModulesDTO {
+  private Measures measure;
+  private Integer mId;
+  private Integer sId;
+  
+  /*
+  public Measures transformToObject(ModulesDTO dto) {
+		Measures measure = new Measures();
+		measure.setMessage(dto.getMessage());
+		measure.setSample(dto.getSample());
+		measure.setStatus(dto.getStatus());
+		return measure;
+  } */
+}

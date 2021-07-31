@@ -1,0 +1,61 @@
+package com.tcc.Satellitechecker.Interface;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+import com.tcc.Satellitechecker.domain.Measures;
+import com.tcc.Satellitechecker.domain.MeasuresRepository;
+import com.tcc.Satellitechecker.domain.Modules;
+import com.tcc.Satellitechecker.domain.ModulesDTO;
+import com.tcc.Satellitechecker.domain.ModulesRepository;
+import com.tcc.Satellitechecker.domain.SatellitesRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/measures")
+@RequiredArgsConstructor
+public class MeasuresController {
+    @Autowired
+	private final MeasuresRepository repository;
+    @Autowired
+	private final ModulesRepository mRep;
+    @Autowired
+  	private final SatellitesRepository sRep;
+
+	
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Measures save(@RequestBody ModulesDTO dto) throws Exception {
+    	Measures measure = dto.transformToObject(dto);
+    	measure.setModule(mRep.findById(dto.getModules_id()).orElseThrow(() -> new Exception("Module doesn't exist")));
+    	measure.setSatellite(sRep.findById(dto.getSatellites_id()).orElseThrow(() -> new Exception("Satellite not found")));
+    	return repository.save(measure);
+    }
+ 
+    @GetMapping
+    public List<Measures> getAll(){
+    	return repository.findAll();
+    }
+    
+    @GetMapping("/search")
+    public List<Measures> getOrganizedMeasure(
+    		@RequestParam(value = "modules", required = false) Integer modules
+    		){
+    	return repository.findMeasures(modules);
+    }
+    
+    
+}

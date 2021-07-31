@@ -1,0 +1,11 @@
+package com.tcc.Satellitechecker.domain;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class ModulesDTO {
+    String nameSatellite;
+    Modules idModule;
+}

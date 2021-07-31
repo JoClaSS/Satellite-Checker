@@ -6,19 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface MeasuresRepository extends JpaRepository<Measures,Integer> {
+public interface MeasuresRepository extends JpaRepository<Measures,Long> {
 	
-	  @Query("SELECT r FROM Measures r WHERE (:message is null or r.message= :message)"
-			  + "and (:status is null or r.status= :status)"
-			  + "and (:modules_id is null or r.modules_id= :modules_id)"
-			  + "and (:satellites_id is null or r.satellites_id= :satellites_id)"
-			  + "and (:sample is null or r.sample= :sample)"
+	  @Query(value = "select * from measures m where m.modules_id = :modules and m.satellites_id =:satellites"
+			  , nativeQuery = true
 			  )
 	  List<Measures> findMeasures(
-			  @Param("sample") Integer sample,
-			  @Param("message") String message,
-			  @Param("status") Boolean status,
-			  @Param("modules_id") Integer modules_id,		
-			  @Param("satellites_id") Integer satellites_id	
-			  );
+			  @Param("modules") Integer modules,
+			  @Param("satellites") Integer satellites
+			  ); 
+	  
 }
+		
+
