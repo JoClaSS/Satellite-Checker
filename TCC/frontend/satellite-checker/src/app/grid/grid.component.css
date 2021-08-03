@@ -1,0 +1,9 @@
+mat-grid-tile {
+    background:transparent;
+    border: 1px solid black;
+  }
+
+.container{
+    float: right;
+    width: 1400px; 
+}
